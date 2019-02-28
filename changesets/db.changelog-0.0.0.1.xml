@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog 
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"> 
+    <changeSet author="authorGonzalez" id="changelog-1.0">
+        <createTable tableName="SONG">
+            <column name="ID" type="INT">
+                <constraints nullable="true" primaryKey="true" unique="false"/>
+            </column>
+            <column name="TITLE" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="DURATION" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="GENRE_ID" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="ARTIST_ID" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="ALBUM_ID" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="authorGonzalez" id="changelog-1.1">
+        <createTable tableName="ARTIST">
+            <column name="ID" type="INT">
+                <constraints nullable="true" primaryKey="true" unique="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="NUMBER_ALBUMS" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>  
+    </changeSet>
+    <changeSet author="authorGonzalez" id="changelog-1.2">
+        <createTable tableName="ALBUM">
+            <column name="ID" type="INT">
+                <constraints nullable="true" primaryKey="true" unique="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="YEAR" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="NUMBER_SONGS" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>  
+    </changeSet>
+    <changeSet author="authorGonzalez" id="changelog-1.3">
+        <createTable tableName="GENRE">
+            <column name="ID" type="INT">
+                <constraints nullable="true" primaryKey="true" unique="false"/>
+            </column>
+            <column name="TITLE" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="authorGonzalez" id="changelog-1.4">
+    <addForeignKeyConstraint baseColumnNames="GENRE_ID"
+            baseTableName="SONG"
+            constraintName="FK_SONG_GENRE"
+            referencedColumnNames="ID"
+            referencedTableName="GENRE"/>
+    </changeSet>
+    <changeSet author="authorGonzalez" id="changelog-1.5">
+        <createTable tableName="ARTIST_ALBUM">
+            <column name="ARTIST_ID" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="true"/>
+            </column>
+            <column name="ALBUM_ID" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="true"/>
+            </column>
+            <column name="SONG_ID" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="authorGonzalez" id="changelog-1.6">
+    <addForeignKeyConstraint baseColumnNames="ARTIST_ID"
+            baseTableName="ARTIST_ALBUM"
+            constraintName="FK_ARTIST_ALBUM_ARTIST"
+            referencedColumnNames="ID"
+            referencedTableName="ARTIST"/>
+    </changeSet>
+    <changeSet author="authorGonzalez" id="changelog-1.7">
+    <addForeignKeyConstraint baseColumnNames="ALBUM_ID"
+            baseTableName="ARTIST_ALBUM"
+            constraintName="FK_ARTIST_ALBUM_ALBUM"
+            referencedColumnNames="ID"
+            referencedTableName="ALBUM"/>
+    </changeSet>
+    <changeSet author="authorGonzalez" id="changelog-1.8">
+        <addPrimaryKey columnNames="ARTIST_ID, ALBUM_ID"
+           constraintName="PK_ARTIST_ALBUM"
+           tableName="ARTIST_ALBUM"/>
+   </changeSet>
+   <changeSet author="authorGonzalez" id="changelog-1.9">
+    <addForeignKeyConstraint baseColumnNames="SONG_ID"
+            baseTableName="ARTIST_ALBUM"
+            constraintName="FK_ARTIST_ALBUM_SONG"
+            referencedColumnNames="ID"
+            referencedTableName="SONG"/>
+    </changeSet>
+</databaseChangeLog>
