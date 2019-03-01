@@ -1,4 +1,4 @@
-#Examen
+# Examen
 
 ## Nombre Pattern Design
 
@@ -12,5 +12,3 @@ En este caso, cuando uno de los servicios devuelva true los demás ya estarán n
 que continuar en modo "observer", unicamente el principal, si el estado vuelve a cambiar, puede volver
 a mandar una notificación para a visar a los demás que el estado cambio y volverá a empezar la espera
 del pago.
-
-![alt text](https://github.com/samsaavel/liquids_examen/blob/master/pattern/IMG_20190228_180420097.jpg)
