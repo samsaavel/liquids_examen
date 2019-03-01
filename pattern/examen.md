@@ -1,6 +1,6 @@
 # Examen
 
-## Nombre Pattern Design
+## Nombre Pattern Design: Observer
 
 Usar observer para el modo de esperar a que se realize un pago para poder enviarlo a cada uno de los 
 servicios en el cual se podrá reproducir el streaming de la canción, en este caso el observer tendrá 
